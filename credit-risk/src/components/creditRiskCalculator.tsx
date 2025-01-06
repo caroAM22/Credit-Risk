@@ -31,6 +31,7 @@ const CreditRiskCalculator = () => {
         title: "Riesgo",
         description: "En grave riesgo"
       }
+      console.log(data);
       setResult(riskResult);
       setIsModalOpen(true);
     } catch {
