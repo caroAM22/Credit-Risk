@@ -1,4 +1,4 @@
-# Credit Risk Prediction - React and TypeScript
+# Task 2: Credit Risk Models with ANN (Artificial Neural Networks)
 
 This repository contains the code and additional files for the **Credit Risk Prediction** task. The goal of the project is to create a model to predict the likelihood of an individual defaulting on their credit payment using a neural network.
 
