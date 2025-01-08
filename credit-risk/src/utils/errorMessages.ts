@@ -3,13 +3,10 @@ export const errorMessages = {
   invalidType: 'El valor ingresado no es válido',
   positiveNumber: 'Debe ser un número positivo',
   integerNumber: 'Debe ser un número entero',
-  maxAge: 'La edad debe ser menor o igual a 120 años',
-  minCreditScore: 'El puntaje de crédito debe ser al menos 300',
-  maxCreditScore: 'El puntaje de crédito debe ser como máximo 850',
-  minDebtToIncomeRatio: 'El ratio deuda/ingreso debe ser al menos 0',
-  maxDebtToIncomeRatio: 'El ratio deuda/ingreso debe ser como máximo 1',
-  minInterestRate: 'La tasa de interés debe ser al menos 0%',
-  maxInterestRate: 'La tasa de interés debe ser como máximo 100%'
+  minValue: (min: number | Date) => `El valor mínimo es ${min instanceof Date ? min.toLocaleDateString() : min}`,
+  maxValue: (max: number | Date) => `El valor máximo es ${max instanceof Date ? max.toLocaleDateString() : max}`,
+  minLength: (min: number) => `Debe tener al menos ${min} caracteres`,
+  maxLength: (max: number) => `Debe tener como máximo ${max} caracteres`,
+  invalidOption: 'Seleccione una opción válida',
+  invalidDate: 'La fecha ingresada no es válida',
 }
-  
-  

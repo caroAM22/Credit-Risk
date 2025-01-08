@@ -1,172 +1,154 @@
-import { useForm } from 'react-hook-form'
+import { useState } from 'react'
+import { useForm, FormProvider } from 'react-hook-form'
 import { zodResolver } from '@hookform/resolvers/zod'
-import { z } from 'zod'
 import { CreditFormData } from '../types/credit'
-import { errorMessages } from '../utils/errorMessages'
-
-const schema = z.object({
-  age: z.number({
-    required_error: errorMessages.required,
-    invalid_type_error: errorMessages.invalidType
-  }).int(errorMessages.integerNumber).positive(errorMessages.positiveNumber).max(120, errorMessages.maxAge),
-  income: z.number({
-    required_error: errorMessages.required,
-    invalid_type_error: errorMessages.invalidType
-  }).positive(errorMessages.positiveNumber),
-  employmentYears: z.number({
-    required_error: errorMessages.required,
-    invalid_type_error: errorMessages.invalidType
-  }).int(errorMessages.integerNumber).nonnegative(errorMessages.positiveNumber),
-  creditScore: z.number({
-    required_error: errorMessages.required,
-    invalid_type_error: errorMessages.invalidType
-  }).int(errorMessages.integerNumber).min(300, errorMessages.minCreditScore).max(850, errorMessages.maxCreditScore),
-  debtToIncomeRatio: z.number({
-    required_error: errorMessages.required,
-    invalid_type_error: errorMessages.invalidType
-  }).min(0, errorMessages.minDebtToIncomeRatio).max(1, errorMessages.maxDebtToIncomeRatio),
-  loanAmount: z.number({
-    required_error: errorMessages.required,
-    invalid_type_error: errorMessages.invalidType
-  }).positive(errorMessages.positiveNumber),
-  loanTerm: z.number({
-    required_error: errorMessages.required,
-    invalid_type_error: errorMessages.invalidType
-  }).int(errorMessages.integerNumber).positive(errorMessages.positiveNumber),
-  interestRate: z.number({
-    required_error: errorMessages.required,
-    invalid_type_error: errorMessages.invalidType
-  }).min(0, errorMessages.minInterestRate).max(100, errorMessages.maxInterestRate),
-})
+import LoanInfoStep from './formSteps/loanInfoStep'
+import PersonalInfoStep from './formSteps/personalInfoStep'
+import FinancialInfoStep from './formSteps/financialInfoStep'
+import CreditHistoryStep from './formSteps/creditHistoryStep'
+import AdditionalInfoStep from './formSteps/additionalInfoStep'
+import { loanInfoSchema } from '../schemas/loanInfoSchema';
+import { financialInfoSchema } from '../schemas/financialInfoSchema'
+import { personalInfoSchema } from '../schemas/personalInfoSchema'
+import { additionalInfoSchema } from '../schemas/additionalInfoSchema'
+import { historyInfoSchema } from '../schemas/historyInfoSchema'
 
 type Props = {
-  onSubmit: (data: CreditFormData) => void
-}
+  onSubmit: (data: CreditFormData) => void;
+};
+
+const steps = [
+  { title: 'Información del Préstamo', component: LoanInfoStep, schema: loanInfoSchema },
+  { title: 'Información Personal', component: PersonalInfoStep, schema: personalInfoSchema },
+  { title: 'Información Financiera', component: FinancialInfoStep, schema: financialInfoSchema },
+  { title: 'Historial Crediticio', component: CreditHistoryStep, schema: historyInfoSchema },
+  { title: 'Información Adicional', component: AdditionalInfoStep, schema: additionalInfoSchema },
+]
 
 const CreditForm = ({ onSubmit }: Props) => {
-  const { register, handleSubmit, formState: { errors } } = useForm<CreditFormData>({
-    resolver: zodResolver(schema)
-  })
+  const [currentStep, setCurrentStep] = useState(0);
+  const CurrentStep = steps[currentStep];
+  const methods = useForm({
+    resolver: zodResolver(CurrentStep.schema),
+    mode: 'onChange',
+    defaultValues: {
+      loan_amnt: '',
+      funded_amnt: '',
+      funded_amnt_inv: null,
+      term: '',
+      int_rate: null,
+      installment: '',
+      grade: '',
+      sub_grade: null,
+      emp_title: '',
+      emp_length: '',
+      home_ownership: 'rent',
+      annual_inc: null,
+      verification_status: null,
+      issue_d: null,
+      loan_status: 'current',
+      pymnt_plan: null,
+      purpose: 'credit card',
+      title: '',
+      zip_code: null,
+      addr_state: '',
+      dti: null,
+      delinq_2yrs: null,
+      earliest_cr_line: null,
+      inq_last_6mths: null,
+      mths_since_last_delinq: null,
+      open_acc: null,
+      pub_rec: null,
+      revol_bal: null,
+      revol_util: null,
+      total_acc: null,
+      initial_list_status: 'f',
+      out_prncp: '',
+      out_prncp_inv: '',
+      total_pymnt: null,
+      total_pymnt_inv: null,
+      total_rec_prncp: '',
+      total_rec_int: '',
+      total_rec_late_fee: null,
+      recoveries: '',
+      collection_recovery_fee: '',
+      last_pymnt_d: new Date('2007-01-01'),
+      last_pymnt_amnt: null,
+      next_pymnt_d: new Date('2007-01-01'),
+      last_credit_pull_d: null,
+      collections_12_mths_ex_med: null,
+      application_type: null,
+      acc_now_delinq: null,
+      tot_coll_amt: null,
+      tot_cur_bal: null,
+      total_rev_hi_lim: '',
+      desc: '',
+    },
+  });
+
+  const { handleSubmit, formState: { isValid }, getValues } = methods
+
+  const nextStep = async () => {
+    const isValidStep = await methods.trigger(); // Valida los campos visibles en el paso actual.
+    console.log(getValues());
+    if (isValidStep) {
+      setCurrentStep((prev) => Math.min(prev + 1, steps.length - 1));
+    }
+  };
+
+  const prevStep = () => {
+    setCurrentStep((prev) => Math.max(prev - 1, 0))
+  }
+
+  const CurrentStepComponent = steps[currentStep].component
 
   return (
-    <form onSubmit={handleSubmit(onSubmit)} className="space-y-6">
-      <div className="grid grid-cols-1 gap-y-6 gap-x-4 sm:grid-cols-2">
-        <div>
-          <label htmlFor="age" className="block text-sm font-medium text-gray-700">Edad</label>
-          <div className="mt-1">
-            <input
-              type="number"
-              id="age"
-              {...register('age', { valueAsNumber: true })}
-              className="shadow-sm focus:ring-indigo-500 focus:border-indigo-500 block w-full sm:text-sm border-gray-300 rounded-md"
-            />
+    <FormProvider {...methods}>
+      <form onSubmit={handleSubmit(onSubmit)} className="space-y-6">
+        <div className="mb-4">
+          <h2 className="text-xl font-semibold">{steps[currentStep].title}</h2>
+          <div className="mt-2 flex">
+            {steps.map((_, index) => (
+              <div
+                key={index}
+                className={`flex-1 h-2 ${
+                  index <= currentStep ? 'bg-blue-500' : 'bg-gray-200'
+                }`}
+              />
+            ))}
           </div>
-          {errors.age && <p className="mt-2 text-sm text-red-600">{errors.age.message}</p>}
         </div>
+        <CurrentStepComponent />
 
-        <div>
-          <label htmlFor="income" className="block text-sm font-medium text-gray-700">Ingreso Anual</label>
-          <div className="mt-1">
-            <input
-              type="number"
-              id="income"
-              {...register('income', { valueAsNumber: true })}
-              className="shadow-sm focus:ring-indigo-500 focus:border-indigo-500 block w-full sm:text-sm border-gray-300 rounded-md"
-            />
-          </div>
-          {errors.income && <p className="mt-2 text-sm text-red-600">{errors.income.message}</p>}
-        </div>
-
-        <div>
-          <label htmlFor="employmentYears" className="block text-sm font-medium text-gray-700">Años de Empleo</label>
-          <div className="mt-1">
-            <input
-              type="number"
-              id="employmentYears"
-              {...register('employmentYears', { valueAsNumber: true })}
-              className="shadow-sm focus:ring-indigo-500 focus:border-indigo-500 block w-full sm:text-sm border-gray-300 rounded-md"
-            />
-          </div>
-          {errors.employmentYears && <p className="mt-2 text-sm text-red-600">{errors.employmentYears.message}</p>}
-        </div>
-
-        <div>
-          <label htmlFor="creditScore" className="block text-sm font-medium text-gray-700">Puntaje de Crédito</label>
-          <div className="mt-1">
-            <input
-              type="number"
-              id="creditScore"
-              {...register('creditScore', { valueAsNumber: true })}
-              className="shadow-sm focus:ring-indigo-500 focus:border-indigo-500 block w-full sm:text-sm border-gray-300 rounded-md"
-            />
-          </div>
-          {errors.creditScore && <p className="mt-2 text-sm text-red-600">{errors.creditScore.message}</p>}
-        </div>
-
-        <div>
-          <label htmlFor="debtToIncomeRatio" className="block text-sm font-medium text-gray-700">Ratio Deuda/Ingreso</label>
-          <div className="mt-1">
-            <input
-              type="number"
-              id="debtToIncomeRatio"
-              step="0.01"
-              {...register('debtToIncomeRatio', { valueAsNumber: true })}
-              className="shadow-sm focus:ring-indigo-500 focus:border-indigo-500 block w-full sm:text-sm border-gray-300 rounded-md"
-            />
-          </div>
-          {errors.debtToIncomeRatio && <p className="mt-2 text-sm text-red-600">{errors.debtToIncomeRatio.message}</p>}
-        </div>
-
-        <div>
-          <label htmlFor="loanAmount" className="block text-sm font-medium text-gray-700">Monto del Préstamo</label>
-          <div className="mt-1">
-            <input
-              type="number"
-              id="loanAmount"
-              {...register('loanAmount', { valueAsNumber: true })}
-              className="shadow-sm focus:ring-indigo-500 focus:border-indigo-500 block w-full sm:text-sm border-gray-300 rounded-md"
-            />
-          </div>
-          {errors.loanAmount && <p className="mt-2 text-sm text-red-600">{errors.loanAmount.message}</p>}
-        </div>
-
-        <div>
-          <label htmlFor="loanTerm" className="block text-sm font-medium text-gray-700">Plazo del Préstamo (meses)</label>
-          <div className="mt-1">
-            <input
-              type="number"
-              id="loanTerm"
-              {...register('loanTerm', { valueAsNumber: true })}
-              className="shadow-sm focus:ring-indigo-500 focus:border-indigo-500 block w-full sm:text-sm border-gray-300 rounded-md"
-            />
-          </div>
-          {errors.loanTerm && <p className="mt-2 text-sm text-red-600">{errors.loanTerm.message}</p>}
-        </div>
-
-        <div>
-          <label htmlFor="interestRate" className="block text-sm font-medium text-gray-700">Tasa de Interés (%)</label>
-          <div className="mt-1">
-            <input
-              type="number"
-              id="interestRate"
-              step="0.01"
-              {...register('interestRate', { valueAsNumber: true })}
-              className="shadow-sm focus:ring-indigo-500 focus:border-indigo-500 block w-full sm:text-sm border-gray-300 rounded-md"
-            />
-          </div>
-          {errors.interestRate && <p className="mt-2 text-sm text-red-600">{errors.interestRate.message}</p>}
-        </div>
-      </div>
-
-      <div>
+        <div className="flex justify-between mt-6">
         <button
-          type="submit"
-          className="w-full flex justify-center py-2 px-4 border border-transparent rounded-md shadow-sm text-sm font-medium text-white bg-indigo-600 hover:bg-indigo-700 focus:outline-none focus:ring-2 focus:ring-offset-2 focus:ring-indigo-500"
+          type="button"
+          onClick={prevStep}
+          className={`px-4 py-2 bg-gray-200 text-gray-800 rounded hover:bg-gray-300 ${currentStep === 0 ? 'opacity-50 cursor-not-allowed' : ''}`}
+          disabled={currentStep === 0}
         >
-          Calcular Riesgo
+          Anterior
         </button>
-      </div>
-    </form>
+
+        {currentStep < steps.length - 1 ? (
+          <button
+            type="button"
+            onClick={nextStep}
+            className={`px-4 py-2 bg-blue-500 text-white rounded hover:bg-blue-600 ${!isValid ? 'opacity-50 cursor-not-allowed' : ''}`}
+          >
+            Siguiente
+          </button>
+        ) : (
+          <button
+            type="submit"
+            className={`px-4 py-2 bg-green-500 text-white rounded hover:bg-green-600 ${!isValid ? 'opacity-50 cursor-not-allowed' : ''}`}
+          >
+            Enviar
+          </button>
+        )}
+        </div>
+      </form>
+    </FormProvider>
   )
 }
 
