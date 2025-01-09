@@ -14,7 +14,6 @@ const AdditionalInfoStep = () => {
           {...register('initial_list_status')}
           className="mt-1 block w-full rounded-md border-2 border-gray-400 shadow-sm focus:border-indigo-500 focus:ring focus:ring-indigo-300 focus:ring-opacity-75"
         >
-          <option value="">Seleccione una opción</option>
           <option value="f">F</option>
           <option value="w">W</option>
         </select>
@@ -159,7 +158,7 @@ const AdditionalInfoStep = () => {
         <input
           type="date"
           id="last_credit_pull_d"
-          {...register('last_credit_pull_d')}
+          {...register('last_credit_pull_d', { valueAsDate: true })}
           className="mt-1 block w-full rounded-md border-2 border-gray-400 shadow-sm focus:border-indigo-500 focus:ring focus:ring-indigo-300 focus:ring-opacity-75"
         />
         {errors.last_credit_pull_d && <p className="mt-1 text-sm text-red-600">{errors.last_credit_pull_d.message}</p>}
@@ -184,7 +183,7 @@ const AdditionalInfoStep = () => {
         <input
           type="date"
           id="issue_d"
-          {...register('issue_d')}
+          {...register('issue_d', { valueAsDate: true })}
           className="mt-1 block w-full rounded-md border-2 border-gray-400 shadow-sm focus:border-indigo-500 focus:ring focus:ring-indigo-300 focus:ring-opacity-75"
         />
         {errors.issue_d && <p className="mt-1 text-sm text-red-600">{errors.issue_d.message}</p>}
@@ -209,6 +208,20 @@ const AdditionalInfoStep = () => {
           <option value="issued">Emitido</option>
         </select>
         {errors.loan_status && <p className="mt-1 text-sm text-red-600">{errors.loan_status.message}</p>}
+      </div>
+
+      <div>
+        <label htmlFor="application_type" className="block text-sm font-medium text-gray-700">Estado del préstamo</label>
+        <p className="text-xs text-gray-500">Indica el estado del préstamo.</p>
+        <select
+          id="application_type"
+          {...register('application_type')}
+          className="mt-1 block w-full rounded-md border-2 border-gray-400 shadow-sm focus:border-indigo-500 focus:ring focus:ring-indigo-300 focus:ring-opacity-75"
+        >
+          <option value="individual">Individual</option>
+          <option value="joint">Conjunto</option>
+        </select>
+        {errors.application_type && <p className="mt-1 text-sm text-red-600">{errors.application_type.message}</p>}
       </div>
 
       <div>

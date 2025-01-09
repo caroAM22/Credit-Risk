@@ -38,7 +38,6 @@ const PersonalInfoStep = () => {
           {...register('home_ownership')}
           className="mt-1 block w-full rounded-md border-2 border-gray-400 shadow-sm focus:border-indigo-500 focus:ring focus:ring-indigo-300 focus:ring-opacity-75"
         >
-          <option value="">Seleccione una opción</option>
           <option value="rent">Alquiler</option>
           <option value="mortgage">Hipoteca</option>
           <option value="none">Ninguna</option>
@@ -66,7 +65,6 @@ const PersonalInfoStep = () => {
           {...register('verification_status')}
           className="mt-1 block w-full rounded-md border-2 border-gray-400 shadow-sm focus:border-indigo-500 focus:ring focus:ring-indigo-300 focus:ring-opacity-75"
         >
-          <option value="">Seleccione una opción</option>
           <option value="verified">Verificado</option>
           <option value="source verified">Fuente Verificada</option>
         </select>
@@ -74,13 +72,15 @@ const PersonalInfoStep = () => {
       </div>
 
       <div>
-        <label htmlFor="zip_code" className="block text-sm font-medium text-gray-700">Código Postal</label>
-        <input
-          type="text"
+        <label htmlFor="zip_code" className="block text-sm font-medium text-gray-700">Código postal</label>
+        <p className="text-gray-500 text-xs mt-1">Seleccione el código postal.</p>
+        <select
           id="zip_code"
           {...register('zip_code')}
           className="mt-1 block w-full rounded-md border-2 border-gray-400 shadow-sm focus:border-indigo-500 focus:ring focus:ring-indigo-300 focus:ring-opacity-75"
-        />
+        >
+          <option value="xx">xx</option>
+        </select>
         {errors.zip_code && <p className="mt-1 text-sm text-red-600">{errors.zip_code.message}</p>}
       </div>
 
@@ -92,8 +92,8 @@ const PersonalInfoStep = () => {
           {...register('addr_state')}
           className="mt-1 block w-full rounded-md border-2 border-gray-400 shadow-sm focus:border-indigo-500 focus:ring focus:ring-indigo-300 focus:ring-opacity-75"
         >
-          <option value="">Seleccione un estado</option>
-          {['az', 'ga', 'il', 'ca', 'nc', 'tx', 'va', 'mo', 'ct', 'ut', 'fl', 'ny', 'pa', 'mn', 'nj', 'ky', 'oh', 'sc', 'ri', 'la', 'wa', 'wi', 'al', 'co', 'ks', 'nv', 'ak', 'md', 'wv', 'vt', 'mi', 'dc', 'sd', 'nh', 'ar', 'nm', 'mt', 'hi', 'wy', 'ok', 'de', 'ms', 'tn', 'ia', 'ne', 'id', 'nd'].map((state) => (
+          <option value={'az'}>AZ</option>
+          {['ga', 'il', 'ca', 'nc', 'tx', 'va', 'mo', 'ct', 'ut', 'fl', 'ny', 'pa', 'mn', 'nj', 'ky', 'oh', 'sc', 'ri', 'la', 'wa', 'wi', 'al', 'co', 'ks', 'nv', 'ak', 'md', 'wv', 'vt', 'mi', 'dc', 'sd', 'nh', 'ar', 'nm', 'mt', 'hi', 'wy', 'ok', 'de', 'ms', 'tn', 'ia', 'ne', 'id', 'nd'].map((state) => (
             <option key={state} value={state}>{state.toUpperCase()}</option>
           ))}
         </select>

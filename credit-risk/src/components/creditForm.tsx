@@ -51,7 +51,7 @@ const CreditForm = ({ onSubmit }: Props) => {
       purpose: 'credit card',
       title: '',
       zip_code: null,
-      addr_state: '',
+      addr_state: 'az',
       dti: null,
       delinq_2yrs: null,
       earliest_cr_line: null,
@@ -77,7 +77,7 @@ const CreditForm = ({ onSubmit }: Props) => {
       next_pymnt_d: new Date('2007-01-01'),
       last_credit_pull_d: null,
       collections_12_mths_ex_med: null,
-      application_type: null,
+      application_type: '',
       acc_now_delinq: null,
       tot_coll_amt: null,
       tot_cur_bal: null,
@@ -86,10 +86,10 @@ const CreditForm = ({ onSubmit }: Props) => {
     },
   });
 
-  const { handleSubmit, formState: { isValid }, getValues } = methods
+  const { handleSubmit, getValues } = methods
 
   const nextStep = async () => {
-    const isValidStep = await methods.trigger(); // Valida los campos visibles en el paso actual.
+    const isValidStep = await methods.trigger();
     console.log(getValues());
     if (isValidStep) {
       setCurrentStep((prev) => Math.min(prev + 1, steps.length - 1));
@@ -124,7 +124,7 @@ const CreditForm = ({ onSubmit }: Props) => {
         <button
           type="button"
           onClick={prevStep}
-          className={`px-4 py-2 bg-gray-200 text-gray-800 rounded hover:bg-gray-300 ${currentStep === 0 ? 'opacity-50 cursor-not-allowed' : ''}`}
+          className="px-4 py-2 bg-gray-200 text-gray-800 rounded hover:bg-gray-300"
           disabled={currentStep === 0}
         >
           Anterior
@@ -134,14 +134,14 @@ const CreditForm = ({ onSubmit }: Props) => {
           <button
             type="button"
             onClick={nextStep}
-            className={`px-4 py-2 bg-blue-500 text-white rounded hover:bg-blue-600 ${!isValid ? 'opacity-50 cursor-not-allowed' : ''}`}
+            className="px-4 py-2 bg-blue-500 text-white rounded hover:bg-blue-600"
           >
             Siguiente
           </button>
         ) : (
           <button
             type="submit"
-            className={`px-4 py-2 bg-green-500 text-white rounded hover:bg-green-600 ${!isValid ? 'opacity-50 cursor-not-allowed' : ''}`}
+            className="px-4 py-2 bg-blue-500 text-white rounded hover:bg-blue-600"
           >
             Enviar
           </button>
