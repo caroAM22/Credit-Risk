@@ -130,7 +130,7 @@ const AdditionalInfoStep = () => {
 
       <div>
         <label htmlFor="last_pymnt_d" className="block text-sm font-medium text-gray-700">Fecha del último pago</label>
-        <p className="text-xs text-gray-500">Fecha del último pago realizado en el préstamo.</p>
+        <p className="text-xs text-gray-500">Fecha del último pago realizado en el préstamo. La fecha que se pondrá por defecto es 2007-01-01 en caso de no seleccionar</p>
         <input
           type="date"
           id="last_pymnt_d"
@@ -142,7 +142,7 @@ const AdditionalInfoStep = () => {
 
       <div>
         <label htmlFor="next_pymnt_d" className="block text-sm font-medium text-gray-700">Fecha del próximo pago</label>
-        <p className="text-xs text-gray-500">Fecha en la que se espera el próximo pago.</p>
+        <p className="text-xs text-gray-500">Fecha en la que se espera el próximo pago. La fecha que se pondrá por defecto es 2007-01-01 en caso de no seleccionar</p>
         <input
           type="date"
           id="next_pymnt_d"
