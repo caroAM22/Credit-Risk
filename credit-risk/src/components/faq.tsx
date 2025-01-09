@@ -10,6 +10,10 @@ const FAQ = () => {
       answer: "Complete todas las secciones del formulario, haciendo clic en 'Siguiente' y, al finalizar, presione 'Enviar' para obtener su resultado."
     },
     {
+      question: "¿Cuál es la divisa que utiliza el modelo?",
+      answer: "Dólares estadounidenses (USD), por favor ingrese todos los valores teniendo esto en cuenta."
+    },
+    {
       question: "¿Cómo se calcula el riesgo crediticio?",
       answer: "El riesgo crediticio se calcula utilizando varios factores, incluyendo su historial crediticio, ingresos, deudas actuales y capacidad de pago. Nuestro algoritmo analiza estos datos para determinar la probabilidad de que pueda cumplir con sus obligaciones financieras futuras."
     },

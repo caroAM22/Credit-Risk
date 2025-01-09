@@ -68,16 +68,11 @@ export const historyInfoSchema = z.object({
       .optional(),
       
       total_rev_hi_lim: z.preprocess(
-        (val) => {
-          const numberValue = Number(val);
-          return isNaN(numberValue) ? null : numberValue; 
-        },
-        z.union([
+          (val) => (isNaN(Number(val)) ? undefined : Number(val)),
           z.number({
+            required_error: errorMessages.required,
             invalid_type_error: errorMessages.invalidType,
-          }).min(0, errorMessages.minValue(0)).max(9999999, errorMessages.maxValue(9999999)),
-          z.null(),
-        ])
-      )
-      .optional()
+          })
+          .min(0, errorMessages.minValue(0)).max(9999999, errorMessages.maxValue(9999999)),
+        ),
 });

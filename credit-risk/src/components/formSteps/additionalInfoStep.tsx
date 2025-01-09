@@ -7,7 +7,7 @@ const AdditionalInfoStep = () => {
   return (
     <div className="space-y-10">
       <div>
-        <label htmlFor="initial_list_status" className="block text-sm font-medium text-gray-700">Estado inicial en la Lista</label>
+        <label htmlFor="initial_list_status" className="block text-sm font-medium text-gray-700">Estado inicial en la lista</label>
         <p className="text-xs text-gray-500">El estado inicial en la lista de crédito, puede ser 'F' o 'W'.</p>
         <select
           id="initial_list_status"
@@ -22,7 +22,7 @@ const AdditionalInfoStep = () => {
 
       <div>
         <label htmlFor="out_prncp" className="block text-sm font-medium text-gray-700">Monto principal pendiente</label>
-        <p className="text-xs text-gray-500">Monto restante que se debe del préstamo.</p>
+        <p className="text-xs text-gray-500">Monto restante en dólares que se debe del préstamo.</p>
         <input
           type="number"
           id="out_prncp"
@@ -33,8 +33,8 @@ const AdditionalInfoStep = () => {
       </div>
 
       <div>
-        <label htmlFor="out_prncp_inv" className="block text-sm font-medium text-gray-700">Monto Principal Pendiente Invertido</label>
-        <p className="text-xs text-gray-500">Monto restante en inversiones.</p>
+        <label htmlFor="out_prncp_inv" className="block text-sm font-medium text-gray-700">Monto principal pendiente invertido</label>
+        <p className="text-xs text-gray-500">Monto restante en inversiones (en dólares).</p>
         <input
           type="number"
           id="out_prncp_inv"
@@ -46,7 +46,7 @@ const AdditionalInfoStep = () => {
 
       <div>
         <label htmlFor="total_pymnt" className="block text-sm font-medium text-gray-700">Pago total realizado</label>
-        <p className="text-xs text-gray-500">El total pagado en el préstamo.</p>
+        <p className="text-xs text-gray-500">El total pagado del préstamo en dólares.</p>
         <input
           type="number"
           id="total_pymnt"
@@ -58,7 +58,7 @@ const AdditionalInfoStep = () => {
 
       <div>
         <label htmlFor="total_pymnt_inv" className="block text-sm font-medium text-gray-700">Pago total invertido</label>
-        <p className="text-xs text-gray-500">El total pagado sobre inversiones.</p>
+        <p className="text-xs text-gray-500">El total pagado sobre inversiones en dólares.</p>
         <input
           type="number"
           id="total_pymnt_inv"
@@ -70,7 +70,7 @@ const AdditionalInfoStep = () => {
 
       <div>
         <label htmlFor="total_rec_prncp" className="block text-sm font-medium text-gray-700">Monto total principal recuperado</label>
-        <p className="text-xs text-gray-500">Monto total recuperado sobre el principal.</p>
+        <p className="text-xs text-gray-500">Monto total recuperado sobre el principal en dólares.</p>
         <input
           type="number"
           id="total_rec_prncp"
@@ -81,8 +81,8 @@ const AdditionalInfoStep = () => {
       </div>
 
       <div>
-        <label htmlFor="total_rec_int" className="block text-sm font-medium text-gray-700">Monto otal recuperado de intereses</label>
-        <p className="text-xs text-gray-500">Monto total recuperado por intereses.</p>
+        <label htmlFor="total_rec_int" className="block text-sm font-medium text-gray-700">Monto total recuperado de intereses</label>
+        <p className="text-xs text-gray-500">Monto total recuperado por intereses en dólares.</p>
         <input
           type="number"
           id="total_rec_int"
@@ -118,7 +118,7 @@ const AdditionalInfoStep = () => {
 
       <div>
         <label htmlFor="last_pymnt_amnt" className="block text-sm font-medium text-gray-700">Monto del último pago</label>
-        <p className="text-xs text-gray-500">Monto del último pago realizado.</p>
+        <p className="text-xs text-gray-500">Monto del último pago realizado en dólares.</p>
         <input
           type="number"
           id="last_pymnt_amnt"
@@ -166,7 +166,7 @@ const AdditionalInfoStep = () => {
 
       <div>
         <label htmlFor="pymnt_plan" className="block text-sm font-medium text-gray-700">Plan de pagos</label>
-        <p className="text-xs text-gray-500">Si aplica, indica el plan de pagos, por defecto es "no aplica".</p>
+        <p className="text-xs text-gray-500">Si aplica, no selecciones ninguna opción. Si no aplica, selecciona 'No aplica'.</p>
         <select
           id="pymnt_plan"
           {...register('pymnt_plan')}
@@ -191,7 +191,7 @@ const AdditionalInfoStep = () => {
 
       <div>
         <label htmlFor="loan_status" className="block text-sm font-medium text-gray-700">Estado del préstamo</label>
-        <p className="text-xs text-gray-500">Indica el estado del préstamo.</p>
+        <p className="text-xs text-gray-500">Indica el estado actual del préstamo.</p>
         <select
           id="loan_status"
           {...register('loan_status')}
@@ -211,8 +211,8 @@ const AdditionalInfoStep = () => {
       </div>
 
       <div>
-        <label htmlFor="application_type" className="block text-sm font-medium text-gray-700">Estado del préstamo</label>
-        <p className="text-xs text-gray-500">Indica el estado del préstamo.</p>
+        <label htmlFor="application_type" className="block text-sm font-medium text-gray-700">Tipo de aplicación</label>
+        <p className="text-xs text-gray-500">Indica el tipo de aplicación.</p>
         <select
           id="application_type"
           {...register('application_type')}

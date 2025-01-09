@@ -34,7 +34,7 @@ const LoanInfoStep = () => {
       </div>
 
       <div>
-        <label htmlFor="desc" className="block text-sm font-medium text-gray-700">Descripción del Préstamo</label>
+        <label htmlFor="desc" className="block text-sm font-medium text-gray-700">Descripción del préstamo</label>
         <textarea
           id="desc"
           {...register('desc')}
@@ -107,7 +107,7 @@ const LoanInfoStep = () => {
 
       <div>
         <label htmlFor="installment" className="block text-sm font-medium text-gray-700">Cuota</label>
-        <p className="text-xs text-gray-500">Ingrese el monto en dolares de cada cuota mensual.</p>
+        <p className="text-xs text-gray-500">Ingrese el monto en dólares de cada cuota mensual.</p>
         <input
           type="number"
           id="installment"
@@ -156,7 +156,6 @@ const LoanInfoStep = () => {
           {...register('purpose')}
           className="mt-1 block w-full rounded-md border-gray-300 shadow-sm focus:border-indigo-300 focus:ring focus:ring-indigo-200 focus:ring-opacity-50"
         >
-          <option value="">Seleccione un propósito</option>
           {Object.entries(purposeOptions).map(([value, label]) => (
             <option key={value} value={value}>{label}</option>
           ))}

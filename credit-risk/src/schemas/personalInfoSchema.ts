@@ -16,9 +16,12 @@ export const personalInfoSchema = z.object({
       invalid_type_error: errorMessages.invalidType,
     }).min(1, errorMessages.minValue(1)).max(10, errorMessages.maxValue(10))),
   
-  home_ownership: z.enum(['rent', 'mortgage', 'none'], {
-    invalid_type_error: errorMessages.invalidOption
-  }),
+  home_ownership: z.preprocess(
+    (val) => (val === "" ? undefined : val),
+    z.enum(['rent', 'mortgage', 'none'], {
+      required_error: errorMessages.required,
+    })
+  ),
   
   annual_inc: z.preprocess(
     (val) => {
@@ -46,8 +49,11 @@ export const personalInfoSchema = z.object({
     z.literal("").transform(() => null),
   ]).optional(),
   
-  addr_state: z.enum(['az', 'ga', 'il', 'ca', 'nc', 'tx', 'va', 'mo', 'ct', 'ut', 'fl', 'ny', 'pa', 'mn', 'nj', 'ky', 'oh', 'sc', 'ri', 'la', 'wa', 'wi', 'al', 'co', 'ks', 'nv', 'ak', 'md', 'wv', 'vt', 'mi', 'dc', 'sd', 'nh', 'ar', 'nm', 'mt', 'hi', 'wy', 'ok', 'de', 'ms', 'tn', 'ia', 'ne', 'id', 'nd'], {
-    required_error: errorMessages.required,
-    invalid_type_error: errorMessages.invalidOption
-  }),
+  addr_state: z.preprocess(
+      (val) => (val === "" ? undefined : val),
+      z.enum(['az', 'ga', 'il', 'ca', 'nc', 'tx', 'va', 'mo', 'ct', 'ut', 'fl', 'ny', 'pa', 'mn', 'nj', 'ky', 'oh', 'sc', 'ri', 'la', 'wa', 'wi', 'al', 'co', 'ks', 'nv', 'ak', 'md', 'wv', 'vt', 'mi', 'dc', 'sd', 'nh', 'ar', 'nm', 'mt', 'hi', 'wy', 'ok', 'de', 'ms', 'tn', 'ia', 'ne', 'id', 'nd'], {
+        required_error: errorMessages.required,
+      })
+  ),
+  
 });

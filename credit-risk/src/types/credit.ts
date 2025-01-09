@@ -1,7 +1,7 @@
 export interface CreditFormData {
     loan_amnt: number | string;
     funded_amnt: number | string;
-    funded_amnt_inv?: number | null;
+    funded_amnt_inv?: number | null ;
     term: number | string;
     int_rate?: number | null;
     installment: number | string;

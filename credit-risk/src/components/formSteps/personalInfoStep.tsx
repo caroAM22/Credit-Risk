@@ -86,7 +86,7 @@ const PersonalInfoStep = () => {
 
       <div>
         <label htmlFor="addr_state" className="block text-sm font-medium text-gray-700">Estado</label>
-        <p className="text-gray-500 text-xs mt-1">Seleccione el estado de su dirección de residencia.</p>
+        <p className="text-gray-500 text-xs mt-1">Seleccione el estado de su dirección de residencia (USA).</p>
         <select
           id="addr_state"
           {...register('addr_state')}

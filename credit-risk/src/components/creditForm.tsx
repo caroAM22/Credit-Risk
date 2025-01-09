@@ -42,16 +42,16 @@ const CreditForm = ({ onSubmit }: Props) => {
       sub_grade: null,
       emp_title: '',
       emp_length: '',
-      home_ownership: 'rent',
+      home_ownership: '',
       annual_inc: null,
       verification_status: null,
       issue_d: null,
-      loan_status: 'current',
+      loan_status: '',
       pymnt_plan: null,
-      purpose: 'credit card',
+      purpose: '',
       title: '',
       zip_code: null,
-      addr_state: 'az',
+      addr_state: '',
       dti: null,
       delinq_2yrs: null,
       earliest_cr_line: null,
@@ -62,7 +62,7 @@ const CreditForm = ({ onSubmit }: Props) => {
       revol_bal: null,
       revol_util: null,
       total_acc: null,
-      initial_list_status: 'f',
+      initial_list_status: '',
       out_prncp: '',
       out_prncp_inv: '',
       total_pymnt: null,
@@ -77,7 +77,7 @@ const CreditForm = ({ onSubmit }: Props) => {
       next_pymnt_d: new Date('2007-01-01'),
       last_credit_pull_d: null,
       collections_12_mths_ex_med: null,
-      application_type: '',
+      application_type: null,
       acc_now_delinq: null,
       tot_coll_amt: null,
       tot_cur_bal: null,
@@ -86,11 +86,10 @@ const CreditForm = ({ onSubmit }: Props) => {
     },
   });
 
+  // const { handleSubmit } = methods
   const { handleSubmit, getValues } = methods
-
   const nextStep = async () => {
     const isValidStep = await methods.trigger();
-    console.log(getValues());
     if (isValidStep) {
       setCurrentStep((prev) => Math.min(prev + 1, steps.length - 1));
     }
@@ -100,11 +99,17 @@ const CreditForm = ({ onSubmit }: Props) => {
     setCurrentStep((prev) => Math.max(prev - 1, 0))
   }
 
+  const handleFinalSubmit = () => {
+    const allValues = getValues();
+    onSubmit(allValues);
+  };
+
+
   const CurrentStepComponent = steps[currentStep].component
 
   return (
     <FormProvider {...methods}>
-      <form onSubmit={handleSubmit(onSubmit)} className="space-y-6">
+      <form onSubmit={handleSubmit(handleFinalSubmit)} className="space-y-6">
         <div className="mb-4">
           <h2 className="text-xl font-semibold">{steps[currentStep].title}</h2>
           <div className="mt-2 flex">

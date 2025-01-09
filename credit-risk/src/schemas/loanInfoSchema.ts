@@ -84,24 +84,26 @@ export const loanInfoSchema = z.object({
       invalid_type_error: errorMessages.invalidType,
     }).min(1, errorMessages.minLength(1)).max(512, errorMessages.maxLength(512))),
 
-  purpose: z.enum([
-    'credit card',
-    'car',
-    'small business',
-    'wedding',
-    'debt consolidation',
-    'home improvement',
-    'major purchase',
-    'medical',
-    'moving',
-    'vacation',
-    'house',
-    'renewable energy',
-    'educational',
-  ], {
-    required_error: errorMessages.required,
-    invalid_type_error: errorMessages.invalidOption,
-  }),
+  purpose: z.preprocess(
+    (val) => (val === "" ? undefined : val),
+    z.enum([
+      'credit card',
+      'car',
+      'small business',
+      'wedding',
+      'debt consolidation',
+      'home improvement',
+      'major purchase',
+      'medical',
+      'moving',
+      'vacation',
+      'house',
+      'renewable energy',
+      'educational',
+    ], {
+      required_error: errorMessages.required,
+    })
+  ),
 
   title: z.preprocess(
     (val) => (val === "" ? undefined : val),
