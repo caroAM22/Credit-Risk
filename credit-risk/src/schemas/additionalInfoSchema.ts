@@ -129,7 +129,10 @@ export const additionalInfoSchema = z.object({
   
   next_pymnt_d: z
   .preprocess(
-    (value) => (typeof value === 'string' ? new Date(value) : value),
+    (value) => {
+      if (value === '') return undefined;
+      return value;
+    },
     z.date({
       required_error: errorMessages.required,
       invalid_type_error: errorMessages.invalidDate,
@@ -159,10 +162,20 @@ export const additionalInfoSchema = z.object({
     z.literal("").transform(() => null),
   ]).optional(),
 
-  issue_d: z.date({
-    required_error: errorMessages.required,
-    invalid_type_error: errorMessages.invalidDate
-  }).min(new Date('2011-01-01'), errorMessages.minValue(new Date('2011-1-1'))).max(new Date('2015-12-31'), errorMessages.maxValue(new Date('2015-12-31'))),
+  issue_d: z.preprocess(
+    (value) => {
+        if (value === '') return undefined;
+        return value;
+    },
+    z.union([
+        z.date({
+          invalid_type_error: errorMessages.invalidDate,
+        })
+        .min(new Date('2011-01-01'), errorMessages.minValue(new Date('2011-1-1'))).max(new Date('2015-12-31'), errorMessages.maxValue(new Date('2015-12-31'))),
+        z.null(),
+      ])
+      .optional()
+  ),
   
   loan_status: z.preprocess(
     (val) => (val === "" ? undefined : val),
