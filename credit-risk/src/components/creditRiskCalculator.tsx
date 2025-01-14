@@ -14,8 +14,7 @@ const CreditRiskCalculator = () => {
     setError(null)
     setResult(null)
     try {
-      console.log(data);
-      const response = await fetch('https://example.com/calculateCreditRisk', {
+      const response = await fetch('https://modelos-de-riesgo-aqum.onrender.com/predict/', {
         method: 'POST',
         headers: {
           'Content-Type': 'application/json'

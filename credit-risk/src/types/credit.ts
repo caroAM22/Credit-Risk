@@ -53,7 +53,5 @@ export interface CreditFormData {
   }
   
   export interface CreditRiskResult {
-    riskPercentage: number;
-    title: string;
-    description: string;
+    prediction: string;
   }
