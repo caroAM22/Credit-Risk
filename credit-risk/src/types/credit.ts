@@ -52,6 +52,7 @@ export interface CreditFormData {
     desc: string;
   }
   
-  export interface CreditRiskResult {
-    prediction: string;
-  }
+export interface CreditRiskResult {
+  prediction: string;
+  probabilities: { [key: string]: number };
+}

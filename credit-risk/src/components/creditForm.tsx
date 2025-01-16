@@ -89,6 +89,7 @@ const CreditForm = ({ onSubmit }: Props) => {
   // const { handleSubmit } = methods
   const { handleSubmit, getValues } = methods
   const nextStep = async () => {
+    console.log(getValues());
     const isValidStep = await methods.trigger();
     if (isValidStep) {
       setCurrentStep((prev) => Math.min(prev + 1, steps.length - 1));
@@ -101,6 +102,7 @@ const CreditForm = ({ onSubmit }: Props) => {
 
   const handleFinalSubmit = () => {
     const allValues = getValues();
+    console.log(allValues);
     onSubmit(allValues);
   };
 

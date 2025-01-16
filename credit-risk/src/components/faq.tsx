@@ -18,9 +18,21 @@ const FAQ = () => {
       answer: "El riesgo crediticio se calcula utilizando varios factores, incluyendo su historial crediticio, ingresos, deudas actuales y capacidad de pago. Nuestro algoritmo analiza estos datos para determinar la probabilidad de que pueda cumplir con sus obligaciones financieras futuras."
     },
     {
-      question: "¿Qué significa mi resultado?",
-      answer: "Su resultado indica la probabilidad de que pueda cumplir con sus obligaciones financieras. Un riesgo bajo sugiere una buena salud financiera, mientras que un riesgo alto podría indicar la necesidad de mejorar su situación financiera. Por ejemplo, un riesgo bajo podría significar que tiene un historial de pagos puntual y una buena relación entre sus ingresos y deudas."
+      "question": "¿Qué significa un puntaje de riesgo alto?",
+      "answer": "Un puntaje entre 300 y 499 indica un riesgo alto. Esto sugiere que su historial financiero es inestable o poco confiable, lo que puede dificultar la aprobación de crédito o llevar a condiciones desfavorables, como tasas de interés más altas o límites de crédito reducidos. Es recomendable trabajar en mejorar su situación financiera, como reducir deudas o mejorar su historial de pagos."
     },
+    {
+      "question": "¿Qué significa un puntaje de riesgo moderado?",
+      "answer": "Un puntaje entre 500 y 649 refleja un riesgo moderado. Esto indica que su situación financiera es razonablemente estable, pero todavía presenta algunas áreas de mejora. Es posible que sea elegible para crédito, pero probablemente enfrentará tasas de interés más altas o restricciones en los montos solicitados. Es recomendable seguir mejorando su historial financiero para obtener condiciones más favorables en el futuro."
+    },
+    {
+      "question": "¿Qué significa un puntaje de riesgo bajo?",
+      "answer": "Un puntaje entre 650 y 799 indica un riesgo bajo. Esto significa que tiene un buen historial financiero, con pagos puntuales y una relación saludable entre ingresos y deudas. Es probable que sea aprobado para crédito con condiciones favorables, como tasas de interés más bajas y mayores montos de crédito. Sin embargo, siempre es recomendable seguir manteniendo una buena gestión financiera para preservar este buen estatus."
+    },
+    {
+      "question": "¿Qué significa un puntaje sin riesgo?",
+      "answer": "Un puntaje de 800 o más es excelente, lo que indica un historial financiero muy sólido y un riesgo mínimo. Este puntaje refleja un comportamiento crediticio ejemplar, con pagos puntuales y un bajo nivel de endeudamiento en relación con sus ingresos. Las probabilidades de obtener crédito en condiciones muy favorables son altas, y se pueden ofrecer tasas de interés muy bajas o límites de crédito elevados."
+    },   
     {
       question: "¿Es seguro ingresar mis datos?",
       answer: "Sí, todos los datos ingresados son procesados de forma segura y no se almacenan en nuestros servidores. Utilizamos encriptación de punta a punta para proteger su información durante la transmisión. Además, nuestros sistemas están diseñados para procesar los datos en tiempo real sin guardar ninguna información personal."
