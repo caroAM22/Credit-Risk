@@ -48,8 +48,8 @@ const CreditForm = ({ onSubmit }: Props) => {
       issue_d: new Date('2014-06-01'),
       loan_status: 'current',
       pymnt_plan: 'n',
-      purpose: 'Consolidación préstamo',
-      title: 'Consolidación préstamo',
+      purpose: 'debt consolidation',
+      title: 'Consolidación de préstamo',
       zip_code: 'xx',
       addr_state: 'ca',
       dti: 18.5,
@@ -82,7 +82,7 @@ const CreditForm = ({ onSubmit }: Props) => {
       tot_coll_amt: 50,
       tot_cur_bal: 30000,
       total_rev_hi_lim: 25000,
-      desc: 'Consolidation of credit card debt',
+      desc: 'Consolidación del préstamo',
     },    
   });
 
